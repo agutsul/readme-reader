@@ -2,6 +2,6 @@ package com.agutsul.readme.reader;
 
 import java.util.List;
 
-public interface GithubClient {
+public interface GithubService {
     List<String> searchReadMeUrls();
 }

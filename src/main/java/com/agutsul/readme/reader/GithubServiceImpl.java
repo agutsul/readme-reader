@@ -14,20 +14,20 @@ import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.replace;
 
-public class GithubClientImpl implements GithubClient {
+public class GithubServiceImpl implements GithubService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GithubClientImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GithubServiceImpl.class);
     private static final String API_GITHUB_COM = "https://api.github.com/";
 
     private static final String README_URL_FORMAT = "%s/%s/README.md";
 
     private final GitHubClient githubClient;
 
-    public GithubClientImpl(String token) {
+    public GithubServiceImpl(String token) {
         this(GitHubClient.create(URI.create(API_GITHUB_COM), token));
     }
 
-    GithubClientImpl(GitHubClient githubClient) {
+    GithubServiceImpl(GitHubClient githubClient) {
         this.githubClient = githubClient;
     }
 

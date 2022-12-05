@@ -19,7 +19,7 @@ import java.util.Optional;
 class ReadMeServiceImplTest {
 
     @Mock
-    private GithubClient githubClient;
+    private GithubService githubService;
     @Mock
     private ContentService contentService;
     @Mock
@@ -30,7 +30,7 @@ class ReadMeServiceImplTest {
 
     @Test
     void tesPrintMostUsedWords() throws IOException {
-        when(githubClient.searchReadMeUrls()).thenReturn(List.of("url"));
+        when(githubService.searchReadMeUrls()).thenReturn(List.of("url"));
         when(contentService.loadContent(any()))
                 .thenReturn(singletonMap("url", Optional.of("words")));
         when(dataService.analyze(any()))
@@ -43,7 +43,7 @@ class ReadMeServiceImplTest {
             readMeService.printMostUsedWords();
             bo.flush();
 
-            String logs = new String(bo.toByteArray());
+            String logs = bo.toString();
             assertTrue(logs.contains("url"));
             assertTrue(logs.contains("[words]"));
         }

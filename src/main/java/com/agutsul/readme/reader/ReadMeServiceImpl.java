@@ -13,18 +13,18 @@ public class ReadMeServiceImpl implements ReadMeService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReadMeServiceImpl.class);
 
-    private final GithubClient githubClient;
+    private final GithubService githubService;
     private final ContentService contentService;
     private final DataService dataService;
 
     public ReadMeServiceImpl(String token) {
-        this(new GithubClientImpl(token), new ContentServiceImpl(), new DataServiceImpl());
+        this(new GithubServiceImpl(token), new ContentServiceImpl(), new DataServiceImpl());
     }
 
-    ReadMeServiceImpl(GithubClient githubClient,
+    ReadMeServiceImpl(GithubService githubService,
                       ContentService contentService,
                       DataService dataService) {
-        this.githubClient = githubClient;
+        this.githubService = githubService;
         this.contentService = contentService;
         this.dataService = dataService;
     }
@@ -32,7 +32,7 @@ public class ReadMeServiceImpl implements ReadMeService {
     @Override
     public void printMostUsedWords() {
         try {
-            List<String> urls = githubClient.searchReadMeUrls();
+            List<String> urls = githubService.searchReadMeUrls();
             Map<String, Optional<String>> content = contentService.loadContent(urls);
             Map<String, List<String>> data = dataService.analyze(content);
 

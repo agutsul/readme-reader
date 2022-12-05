@@ -20,12 +20,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class GithubClientImplTest {
+class GithubServiceImplTest {
 
     @Mock
     private GitHubClient gitHubClient;
     @InjectMocks
-    private GithubClientImpl githubClient;
+    private GithubServiceImpl githubService;
 
     @Test
     void testSearchReadMeUrlsReturningUrl() {
@@ -42,7 +42,7 @@ class GithubClientImplTest {
 
         when(gitHubClient.createSearchClient()).thenReturn(searchClient);
 
-        List<String> urls = githubClient.searchReadMeUrls();
+        List<String> urls = githubService.searchReadMeUrls();
         assertFalse(urls.isEmpty());
         assertEquals("https://raw.githubusercontent.com/JoshBell302/CS344-OSI---Assignment-3-Small-Shell//master/README.md",
                 urls.get(0));
@@ -59,7 +59,7 @@ class GithubClientImplTest {
 
         when(gitHubClient.createSearchClient()).thenReturn(searchClient);
 
-        List<String> urls = githubClient.searchReadMeUrls();
+        List<String> urls = githubService.searchReadMeUrls();
         assertTrue(urls.isEmpty());
     }
 
@@ -72,7 +72,7 @@ class GithubClientImplTest {
 
         when(gitHubClient.createSearchClient()).thenReturn(searchClient);
 
-        List<String> urls = githubClient.searchReadMeUrls();
+        List<String> urls = githubService.searchReadMeUrls();
         assertTrue(urls.isEmpty());
     }
 }
